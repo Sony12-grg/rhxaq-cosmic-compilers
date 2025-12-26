@@ -1,0 +1,48 @@
+{
+  "current_state": "pending",
+  "allowed_next": ["present", "absent", "leave"],
+  "state_machine": {
+    "pending": {
+      "description": "Attendance not yet marked",
+      "allowed_transitions": ["present", "absent", "leave"],
+      "can_edit": true
+    },
+    "present": {
+      "description": "Employee is present",
+      "allowed_transitions": ["present", "absent", "leave"],
+      "can_edit": true,
+      "requires_approval": false
+    },
+    "absent": {
+      "description": "Employee is absent",
+      "allowed_transitions": ["present", "leave"],
+      "can_edit": true,
+      "requires_approval": true
+    },
+    "leave": {
+      "description": "Employee is on leave",
+      "allowed_transitions": ["present", "absent"],
+      "can_edit": true,
+      "requires_approval": true
+    },
+    "approved": {
+      "description": "Attendance record approved by manager",
+      "allowed_transitions": [],
+      "can_edit": false,
+      "final_state": true
+    },
+    "rejected": {
+      "description": "Attendance record rejected",
+      "allowed_transitions": ["pending"],
+      "can_edit": true,
+      "requires_correction": true
+    }
+  },
+  "employee": {
+    "name": "Sambika Gurung",
+    "employee_id": "EMP001",
+    "department": "IT"
+  },
+  "attendance_date": "2025-12-26",
+  "timestamp": "2025-12-26T09:00:00Z"
+}
